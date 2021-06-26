@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-
     
     static associate(models) {
       // define association here
@@ -17,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'programId'
       });
     }
+
   };
   Student.init({
     fullName: DataTypes.STRING,
@@ -30,6 +30,18 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Student',
-  });
+  });  
+
+  Student.prototype.statusCaption = (statusId) => {
+    const STATUS_TYPES = {
+      1: 'Pendaftaran Telah Diajukan',
+      2: 'Pendaftaran Diterima',
+      3: 'Pendaftaran Ditolak'
+    }
+
+    return STATUS_TYPES[statusId];
+  }
+
+
   return Student;
 };
