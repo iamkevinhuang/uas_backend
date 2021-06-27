@@ -20,7 +20,9 @@ const studentController = {
             });
 
             if (validation.fails()){
-                return res.status(422).send({error: validation.errors.errors});
+                const tempArray = []
+                tempArray.push(Object.values(validation.errors.all()).map((item) => item[0]));
+                return res.status(422).send({error: tempArray[0]});
                 // return res.status(422).send({error: validation.errors.errors[Object.keys(validation.errors.errors)[0]][0]});
             }
             
